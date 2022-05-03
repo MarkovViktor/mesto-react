@@ -1,7 +1,6 @@
 import React from "react";
-import { api } from '../utils/Api';
+import { api } from '../utils/api';
 import Card from "./Card";
-
 
 function Main(props) {
 
@@ -17,6 +16,9 @@ function Main(props) {
         setUserAvatar(res.avatar)
         setUserDescription(res.about)
       })
+      .catch(err => {
+        console.log(err); 
+      });
       api.getInitialCards()
       .then((card) => {
         setCards(card)
@@ -30,10 +32,10 @@ function Main(props) {
     <main className="content">
       <section className="profile">
         <button className="profile__avatar-button" onClick={props.onEditAvatar}>
-          <img className="profile__avatar" src="<%=require(&quot;../../images/image.jpg" alt="Аватар" />
+          <img className="profile__avatar" src={userAvatar} alt="Аватар" />
         </button>
-        <h1 className="profile__user-name" />
-        <p className="profile__user-job" />
+        <h1 className="profile__user-name">{userName}</h1>
+        <p className="profile__user-job">{userDescription}</p>
         <button className="profile__edit-button" onClick={props.onEditProfile} type="button" aria-label="изменить профиль" />
         <button className="profile__add-button" onClick={props.onAddPlace} type="button" aria-label="добавить место" />
       </section>

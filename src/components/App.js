@@ -1,6 +1,5 @@
 import React from 'react';
 import Header from './Header';
-import '../App.css';
 import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
@@ -57,9 +56,9 @@ const handleAddPlaceClick = () => {
       isOpen={isEditProfilePopupOpen}
       onClose={closeAllPopups} 
       formName='Форма изменения имени'>
-        <input id="name" name="name" required type="text" className="popup__input popup__input_type_user-name" minLength="2" maxLength="40" />
+        <input id="name" name="name" required type="text" placeholder="Имя" className="popup__input popup__input_type_user-name" minLength="2" maxLength="40" />
         <span id="error-name" className="popup__input-error"></span>
-        <input id="about" name="about" required type="text" className="popup__input popup__input_type_user-job" minLength="2"
+        <input id="about" name="about" required type="text" placeholder="О себе" className="popup__input popup__input_type_user-job" minLength="2"
           maxLength="200" />
         <span id="error-about" className="popup__input-error"></span> 
     </PopupWithForm>
