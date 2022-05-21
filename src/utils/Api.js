@@ -1,7 +1,7 @@
 class Api {
   constructor({ baseUrl, headers }) {
-      this._headers = headers
-      this._baseUrl = baseUrl
+    this._headers = headers
+    this._baseUrl = baseUrl
   }
 
   _checkResponse(res) {
@@ -12,15 +12,15 @@ class Api {
   }
 
   getProfile() {
-      return fetch(`${this._baseUrl}/users/me`, {
-        headers: this._headers
-      }).then(this._checkResponse)
+    return fetch(`${this._baseUrl}/users/me`, {
+      headers: this._headers
+    }).then(this._checkResponse)
   }
 
   getInitialCards() {
-      return fetch(`${this._baseUrl}/cards`, {
-        headers: this._headers
-      }).then(this._checkResponse)
+    return fetch(`${this._baseUrl}/cards`, {
+      headers: this._headers
+    }).then(this._checkResponse)
   }
 
   editProfile(name, about) {
@@ -30,8 +30,8 @@ class Api {
       body: JSON.stringify({
         name,
         about
-    })
-  }).then(this._checkResponse)
+      })
+    }).then(this._checkResponse)
   }
 
   addCard(name, link) {
@@ -41,7 +41,7 @@ class Api {
       body: JSON.stringify({
         name,
         link
-    })
+      })
     }).then(this._checkResponse)
   }
 
@@ -49,30 +49,39 @@ class Api {
     return fetch(`${this._baseUrl}/cards/${id}`, {
       method: "DELETE",
       headers: this._headers
-  }).then(this._checkResponse)
+    }).then(this._checkResponse)
   }
 
   deleteLike(id) {
-  return fetch(`${this._baseUrl}/cards/${id}/likes`, {
-    method: "DELETE",
-    headers: this._headers
-  }).then(this._checkResponse)
+    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+      method: "DELETE",
+      headers: this._headers
+    }).then(this._checkResponse)
+  }
+
+  changeLikeCardStatus(id, isLiked) {
+    return fetch(`${this._baseUrl}/cards/${id}/likes`,
+      {
+        method: isLiked ? "PUT" : "DELETE",
+        headers: this._headers,
+      })
+      .then(this._checkResponse)
   }
 
   addLike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: "PUT",
       headers: this._headers
-  }).then(this._checkResponse)
+    }).then(this._checkResponse)
   }
 
-  addAvatar(avatar) {
+  getAvatar(data) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-          avatar
-        })
+        avatar: data.avatar
+      })
     }).then(this._checkResponse)
   }
 }
